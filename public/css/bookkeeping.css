@@ -1,0 +1,142 @@
+#bookkeeping-landing {
+    height: 600px;
+    background: url('../images/services/bookheader.jpg');
+    background-size: cover;
+    padding-top: 180px;
+    margin: 0 20px;
+}
+
+.service-container {
+    background-color: rgba(36,139,203,0.8);
+}
+
+#tax-landing {
+    height: 600px;
+    background: url('../images/services/bookheader.jpg');
+    background-size: cover;
+    padding-top: 180px;
+    margin: 0 20px;
+}
+
+#profit-landing {
+    height: 600px;
+    background: url('../images/services/bookheader.jpg');
+    background-size: cover;
+    padding-top: 180px;
+    margin: 0 20px;
+}
+
+#tax-landing .service-container {
+    background-color: rgb(93,43,126, 0.8);
+}
+
+#profit-landing .service-container {
+    background-color: rgb(17,184,217, 0.8);
+}
+
+
+.service-title {
+    font-size: 3.5rem;
+    padding: 80px 100px 20px 100px;
+    color: white;
+}
+
+.service-buttons {
+    padding: 0 0 80px 100px;
+}
+
+.reconcile-text {
+    color: var(--darkblue);
+}
+
+#bookkeeping-services {
+    padding: 40px 0;
+}
+
+.acc-icon {
+    margin: 0 20px;
+    width: 16px;
+}
+
+.bookkeeping-accordion-text {
+    color: var(--darkblue);
+    font-weight: 1000;
+    font-size: 3rem;
+    margin-left: 45px;
+}
+
+.accordion-flush {
+    padding-top: 50px;
+}
+
+.accordion-button {
+    color: var(--darkblue);
+}
+
+li {
+    margin: 10px;
+}
+
+#book-other-services {
+    background-image: url('../images/Services/line.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: stretch;
+    border-bottom: 40px solid var(--darkblue)
+}
+
+.other-service {
+    height: 500px;
+    box-shadow: 0px 0px 10px 0px rgb(0,0,0,0.1);
+    padding: 0;
+    transition: transform 400ms ease;
+    margin: 20px 0;
+}
+
+.other-service:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+.other-heading {
+    color: white;
+    margin-top: 347px;
+    background: linear-gradient(rgba(0,0,0,0), rgb(0,0,0,1));
+    padding: 60px 0;
+}
+
+#profit {
+    background-image: url('../images/Services/profit.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+#tax {
+    background-image: url('../images/Services/taxtouch.jpg');
+    background-size: cover;
+    background-position: right;
+}
+
+#bookkeeping {
+    background-image: url('../images/Services/book.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+
+
+@media (max-width: 768px) {
+    #bookkeeping-landing {
+        text-align: center;
+    }
+    
+    .service-title {
+        font-size: 2rem;
+        padding: 80px 0 20px 0;
+    }
+
+    .service-buttons {
+        padding: 0;
+        padding-bottom: 80px;
+    
+    }
+}
