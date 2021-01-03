@@ -61,7 +61,7 @@ app.post('/send', function(req,res){
 
   const data = {
     from: 'milan@vanniekerks.com',
-    to: 'beth.poultney@googlemail.com',
+    to: 'milan.vanniekerk@griffithuni.edu.au',
     subject: 'New Form Submission',
     text: `
     Hi!
