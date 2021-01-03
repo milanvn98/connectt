@@ -61,7 +61,7 @@ app.post('/send', function(req,res){
 
   const data = {
     from: 'milan@vanniekerks.com',
-    to: 'milan@vanniekerks.com',
+    to: 'beth.poultney@googlemail.com',
     subject: 'New Form Submission',
     text: `
     Hi!
