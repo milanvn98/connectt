@@ -15,7 +15,6 @@ app.use(express.static(__dirname + '/public'))
 //Get Request (For pages and Gets)
 app.get('/', function(req, res){
     //Return a Page
-    console.log(process.env.user)
     res.render('index')    
     
 })
@@ -79,7 +78,7 @@ app.post('/send', function(req,res){
 })
 
 app.use(function (req, res, next) {
-  res.status(404).send("Sorry can't find that!")
+  res.status(404).render('404')
 })
 
 app.listen(process.env.PORT || 3000, function(){
