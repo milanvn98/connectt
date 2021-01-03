@@ -1,9 +1,11 @@
+require('dotenv').config();
 const express = require('express')
 const bodyParser = require('body-parser')
 const ejs = require('ejs')
 const https = require('https')
 const app = express()
 const nodemailer = require('nodemailer');
+const SMTPConnection = require('nodemailer/lib/smtp-connection')
 
 app.set('view engine', 'ejs')
 app.use(bodyParser.urlencoded({extended: true}))
@@ -13,6 +15,7 @@ app.use(express.static(__dirname + '/public'))
 //Get Request (For pages and Gets)
 app.get('/', function(req, res){
     //Return a Page
+    console.log(process.env.user)
     res.render('index')    
     
 })
@@ -47,42 +50,30 @@ app.get('/contact', function(req, res){
 //Post request from Form or POSTS
 app.post('/send', function(req,res){
 
-    const name = req.body.name
-    const email = req.body.email
-    const message = req.body.message
 
-    var transporter = nodemailer.createTransport({
-        host: 'mail.smtp2go.com',
-        port: 465,
-        secure: true, // use SSL
-        auth: {
-            user: '',
-            pass: ''
-    }
-      });
-      
-      var mailOptions = {
-        from: 'milan@vanniekerks.com',
-        to: 'milan@vanniekerks.com',
-        subject: 'New Contact Submission',
-        text: `
-        Hi!
+  var API_KEY = process.env.api;
+  var DOMAIN = process.env.domain;
+  var mailgun = require('mailgun-js')({apiKey: API_KEY, domain: DOMAIN});
+  
+  const name = req.body.name
+  const email = req.body.email
+  const message = req.body.message
 
-        Please call/email ` + name + ` at ` + email + ` to discuss their business. This was their message: ` + message + `
-        
-        Thank you!
-        Kind Regards,
-        Architech Server`
-        
-      };
-      
-      transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-          console.log(error);
-        } else {
-          console.log('Email sent: ' + info.response);
-        }
-      });
+  const data = {
+    from: 'milan@vanniekerks.com',
+    to: 'milan@vanniekerks.com',
+    subject: 'New Form Submission',
+    text: `
+    Hi!
+    
+    Please contact ` + name + ` at ` + email + `. Here is their message: 
+    ` + message 
+    
+  };
+  
+  mailgun.messages().send(data, (error, body) => {
+    console.log(body);
+  });
 
     res.redirect('/')
 })
