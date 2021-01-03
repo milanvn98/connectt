@@ -63,7 +63,7 @@ app.post('/send', function(req,res){
       
       var mailOptions = {
         from: 'milan@vanniekerks.com',
-        to: 'admin@connecttbs.com',
+        to: 'milan@vanniekerks.com',
         subject: 'New Contact Submission',
         text: `
         Hi!

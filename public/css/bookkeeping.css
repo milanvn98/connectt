@@ -49,6 +49,11 @@
     color: var(--darkblue);
 }
 
+#reconcile {
+    width: 60%;
+    margin: 0 auto;
+}
+
 #bookkeeping-services {
     padding: 40px 0;
 }
@@ -139,4 +144,41 @@ li {
         padding-bottom: 80px;
     
     }
+
+    .bookkeeping-accordion-text {
+        font-size: 2.5rem;
+        text-align: center;
+    }
+
+    .service-text.mx-5.my-4 {
+        text-align: center;
+    }
+
+    .blurb {
+        text-align: center;
+        padding: 10px;
+    }
+
+    .blurb-button {
+        margin: 0 !important;
+    }
+
+    .other-heading {
+        margin-top: 355px;
+    }
+
+    .service-container{
+        padding: 0 20px;
+        text-align: center;
+    }
+    #tax-landing .service-title, #profit-landing .service-title{
+       width: 70%;
+       margin: 0 auto;
+    }
+
+    #reconcile  {
+        width: 80%;
+    }
+
+    
 }
