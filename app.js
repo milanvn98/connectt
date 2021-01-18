@@ -60,7 +60,7 @@ app.post('/send', function(req,res){
 
   const data = {
     from: 'milan@vanniekerks.com',
-    to: 'milan.vanniekerk@griffithuni.edu.au',
+    to: 'admin@connecttbs.com',
     subject: 'New Form Submission',
     text: `
     Hi!
