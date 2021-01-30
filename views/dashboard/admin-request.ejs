@@ -1,0 +1,33 @@
+<div class="overlay d-none">
+    <div class="modal-container">
+        <h2 class="mb-5">New Employee Request:</h2>
+        <form action="/new-employee-request" method="POST" id="new-employee-form" class="w-50 mx-auto my-3">
+            <input placeholder="First name" name="firstName" type="text">
+            <input placeholder="Last name" name="lastName" type="text">
+            <input placeholder="Company" type="text" name="company" id="company">
+            <p class="text-white mt-5 mt-lg-0 text-left h2 fw-light py-3">Contact:</p>
+            <input placeholder="Email" name="email">
+            <input placeholder="Phone" name="phone">
+            <p class="text-white mt-5 mt-lg-0 text-left h2 fw-light py-3">Position:</p>
+              
+              <label for="startDate" class="text-left">Start Date:</label>
+              <input type="date" name="startDate" id="startDate" placeholder="dd-mm-yyyy">
+              <label for="employmentBasis" class="text-left">Employment Basis:</label>
+              <div class="btn-group text-center mx-auto w-100 px-2" role="group">
+                <input type="radio" class="btn-check" name="employmentBasis" id="fullTime" autocomplete="off" value="FULLTIME" checked>
+                <label class="btn btn-outline-light my-2" for="fullTime">Full-Time</label>
+              
+                <input type="radio" class="btn-check" name="employmentBasis" id="partTime" autocomplete="off" value="PARTTIME">
+                <label class="btn btn-outline-light my-2" for="partTime">Part-Time</label>
+              
+                <input type="radio" class="btn-check" name="employmentBasis" id="casual" autocomplete="off" value="CASUAL">
+                <label class="btn btn-outline-light my-2" for="casual">Casual</label>
+            </div>
+            <input placeholder="Job Title" name="jobTitle">
+              <input placeholder="Hourly Rate in AUD" name="rate">
+              <input placeholder="Award Classification" name="classification" minlength="8" maxlength="8">
+              <a href="https://www.fairwork.gov.au/awards-and-agreements/awards/list-of-awards" target="_blank" class="mx-2 mb-3 text-left d-block">Find Award Classifcations here.</a>
+            <div class="text-center"><button name="submit" value="submit" class="btn btn-outline-light my-3">Submit</button></div>
+        </form>
+    </div>
+</div>

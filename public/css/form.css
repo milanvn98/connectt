@@ -1,0 +1,76 @@
+body {
+  overflow: scroll;
+  background-color: var(--profit);
+}
+
+/* Style the form */
+#new-employee-form {
+    margin: 20px auto;
+    width: 70%;
+    min-width: 300px;
+    text-align: left;
+  }
+  
+  /* Style the input fields */
+  input, select {
+    padding: 10px;
+    width: 100%;
+    font-size: 17px;
+    border: none;
+    border-radius: 10px;
+    margin: 5px;
+    color: var(--darkblue);
+    background-color: white;
+    border: 1px solid var(--profit)
+  }
+  
+  label{
+    color: white;
+    padding-left: 10px;
+  }
+
+
+  /* Mark input boxes that gets an error on validation: */
+  input.invalid {
+    background-color: #ffdddd;
+  }
+  
+  /* Hide all steps by default: */
+  .tab {
+    display: none;
+  }
+  
+  /* Make circles that indicate the steps of the form: */
+  .step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+  }
+  
+  /* Mark the active step: */
+  .step.active {
+    opacity: 1;
+  }
+  
+  /* Mark the steps that are finished and valid: */
+  .step.finish {
+    background-color: var(--darkblue);
+  }
+
+  button {
+      background-color: var(--darkblue);
+      border: none;
+      color: white;
+      padding: 8px 0px;
+      border-radius: 10px;
+      width: 120px;
+  }
+
+  .checkbox {
+      transform: scale(1.5);
+  }

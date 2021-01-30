@@ -1,0 +1,15 @@
+html, body {
+    background: linear-gradient(0.45turn, var(--profit), var(--bookkeeping));
+    height: 100%;
+    overflow: scroll;
+}
+
+.form-container {
+    overflow: scroll;
+}
+
+@media (max-width: 768px) {
+    .form-container{
+        width: 100% !important;
+    }
+}

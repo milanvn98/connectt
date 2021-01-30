@@ -1,0 +1,31 @@
+
+
+Priority:
+
+Find all err and handle (Cancel Auth)
+
+History for Employee Requests
+
+
+Less Priority: 
+Set Up User Password Reset Forgotten Password
+Search Bar
+Client More Info
+MailGun + Heroku server card details
+TFN Disabled more clear
+
+
+NOTES:
+
+Redirect to confirmation page, currently connectt
+If the user enters an invalid super, it just wont add it. Hard to verify super. Although have validated TFN + bsb acc no, will fail if not.
+
+
+Validation:
+DOB has to be in past
+Account Number has to be digits only
+
+
+
+
+
