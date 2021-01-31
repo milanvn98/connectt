@@ -18,7 +18,7 @@ $('.nav-profile').click(function(){
 const url = window.location.href
 const refStatus = url.split('=')[1]
 if (refStatus == "true"){
-    window.location.href = "https://localhost:3000/dashboard"
+    window.location.href = "https://www.connecttbs.com/dashboard"
 }
 
 $('#new-request-btn').click( event => {

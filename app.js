@@ -53,7 +53,6 @@ app.use(passport.session());
 /////////////////////////////////////////// Mongo /////////////////////////////////////////////////////
 
 //mongod --dbpath /usr/local/var/mongodb --logpath /usr/local/var/log/mongodb/mongo.log --fork
-// mongoose.connect("mongodb://localhost:27017/connecttbs", {
   mongoose.connect("mongodb+srv://admin-milan:milan6226@cluster0.julte.mongodb.net/connecttbs?retryWrites=true&w=majority", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
