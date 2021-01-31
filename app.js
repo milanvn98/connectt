@@ -226,7 +226,7 @@ app.get("/callback", async function (req, res) {
     return link
   }
 
-  res.redirect("/dashboard?refresh=true");
+  res.redirect("https://www.connecttbs.com/dashboard?refresh=true");
   
 });
 
@@ -366,7 +366,7 @@ app.post("/new-employee-request", function (req, res) {
     subject: "New Employee Request",
     html: `
     <p style="margin-bottom: 40px;"> Hi! <br>` + request["company"] + ` just posted a new employee request. Please log in to the Connectt Portal to authorise the request.</p>
-    <a href="https://localhost:3000/login" style="background-color: rgb(17,184,217); color: white; padding: 10px 80px; border-radius: 10px; text-decoration: none; margin: 40px 0; font-weight: 700;">Authorise</a>
+    <a href="https://www.connectbs.com/login" style="background-color: rgb(17,184,217); color: white; padding: 10px 80px; border-radius: 10px; text-decoration: none; margin: 40px 0; font-weight: 700;">Authorise</a>
     <br>
     <p style="margin: 40px 0;">Thank you!</p>` 
   }
@@ -561,7 +561,7 @@ app.post("/create-employee", function (req, res) {
            } 
         })      
         
-        res.send(response)
+        res.redirect('/dashboard')
 
       }
     );
