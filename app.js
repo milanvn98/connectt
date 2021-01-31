@@ -366,7 +366,7 @@ app.post("/new-employee-request", function (req, res) {
     subject: "New Employee Request",
     html: `
     <p style="margin-bottom: 40px;"> Hi! <br>` + request["company"] + ` just posted a new employee request. Please log in to the Connectt Portal to authorise the request.</p>
-    <a href="https://www.connecttbs.com/login" style="background-color: rgb(17,184,217); color: white; padding: 10px 80px; border-radius: 10px; text-decoration: none; margin: 40px 0; font-weight: 700;">Authorise</a>
+    <a href="https://localhost:3000/login" style="background-color: rgb(17,184,217); color: white; padding: 10px 80px; border-radius: 10px; text-decoration: none; margin: 40px 0; font-weight: 700;">Authorise</a>
     <br>
     <p style="margin: 40px 0;">Thank you!</p>` 
   }
@@ -629,12 +629,12 @@ app.use(function (req, res, next) {
   res.status(404).render("404");
 });
 
-var server = https.createServer(options, app);
+// var server = https.createServer(options, app);
 
-server.listen(port, () => {
-  console.log("Listening on port: " + port);
-});
+// server.listen(port, () => {
+//   console.log("Listening on port: " + port);
+// });
 
-// app.listen(port, function(){
-//     console.log('Listening on ' + port)
-// })
+app.listen(port, function(){
+    console.log('Listening on ' + port)
+})
