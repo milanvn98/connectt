@@ -212,7 +212,7 @@ app.get("/callback", async function (req, res) {
     subject: "RE Position at " + request.company,
     html: `
     <p style="margin-bottom: 20px;"> Hi! <br> Welcome to ` + request["company"] + `. Please click the link below to complete your application:</p>
-    <a href="`+ buildLink(tenant['tenantId'], token['refresh_token']) +`" style="background-color: rgb(17,184,217); color: white; padding: 10px 80px; border-radius: 10px; text-decoration: none; margin: 60px 0; font-weight: 700;">Authorise</a>
+    <a href="`+ buildLink(tenant['tenantId'], token['refresh_token']) +`" style="background-color: rgb(17,184,217); color: white; padding: 10px 80px; border-radius: 10px; text-decoration: none; margin: 60px 0; font-weight: 700;">Complete</a>
     <br>
     <p style="margin: 60px 0;">Thank you! <br> Kind Regards, <br> Connectt Total Business Solutions</p>`
 };
@@ -561,7 +561,7 @@ app.post("/create-employee", function (req, res) {
            } 
         })      
         
-        res.redirect('/dashboard')
+        res.redirect('https://www.connecttbs.com/')
 
       }
     );
