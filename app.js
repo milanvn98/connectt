@@ -36,12 +36,12 @@ app.use(function (req, res, next) {
   res.status(404).render("404");
 });
 
-var server = https.createServer(options, app);
+// var server = https.createServer(options, app);
 
-server.listen(port, () => {
-  console.log("Listening on port: " + port);
-});
+// server.listen(port, () => {
+//   console.log("Listening on port: " + port);
+// });
 
-// app.listen(port, function(){
-//     console.log('Listening on ' + port)
-// })
+app.listen(port, function(){
+    console.log('Listening on ' + port)
+})
