@@ -8,6 +8,8 @@ const mailgun = require("mailgun-js")({
     domain: process.env.DOMAIN,
   });
 
+app.use(require('../web/navigation'))
+
 
 
 /////////////////////////////////////////// Xero Connection /////////////////////////////////////////////
@@ -81,7 +83,7 @@ app.get("/xero-callback", async function (req, res) {
 
   
      //Find Request
-     db.findRequest({'_id': requestID}, r => {
+     db.findRequest({'_id': requestID}, request => {
 
       //Update Request
       db.updateRequest({'_id': requestID },{
@@ -111,7 +113,7 @@ app.get("/xero-callback", async function (req, res) {
         return link
       }
     
-      res.redirect("https://www.connecttbs.com/dashboard?refresh=true");
+      res.redirect("/dashboard?refresh=true");
      })
  
 
@@ -281,14 +283,16 @@ app.post("/new-employee-request", function (req, res) {
                     request.save()
                 }
 
-                //Disconnect Xero Tenant
-                db.findManyRequests({'tenant': tenant.tenantId, 'status': 'Pending'}, requests => {
-                    if (requests.length < 1 || !requests){
-                        xero.disconnect(tenant['id'])
-                        db.deleteTenant({'tenantId': tenant['tenantId']})
-                      } 
-                   }) 
-                })
+                setTimeout(function(){
+                  //Disconnect Xero Tenant
+                  db.findManyRequests({'tenant': tenant.tenantId, 'status': 'Pending'}, requests => {
+                      if (requests.length < 1 || !requests){
+                          xero.disconnect(tenant['id'])
+                          db.deleteTenant({'tenantId': tenant.tenantId})
+                        } 
+                     }) 
+                  })}, 4000)
+                
 
 
                 //Redirect to Connectt Website

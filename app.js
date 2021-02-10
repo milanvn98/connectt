@@ -41,6 +41,9 @@ var server = https.createServer(options, app);
 server.listen(port, () => {
   console.log("Listening on port: " + port);
 });
+
 // app.listen(port, function(){
 //   console.log('Listening on ' + port)
 // })
+
+// NODE_TLS_REJECT_UNAUTHORIZED=0

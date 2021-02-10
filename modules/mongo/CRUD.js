@@ -274,7 +274,8 @@ const tenantSchema = new mongoose.Schema({
   
   //Delete
    function deleteTenant(obj){
-    Tenant.deleteOne(obj)
+    Tenant.deleteOne(obj, function(err, tenant){
+    })
   }
 
   /////////////////////////////////////////////// /KTExtract Data save /////////////////////////////////////////////// 
