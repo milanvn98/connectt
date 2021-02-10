@@ -87,7 +87,7 @@ app.get("/xero-callback", async function (req, res) {
       db.updateRequest({'_id': requestID },{
         'token': token['refresh_token'],
         'tenant': tenant['tenantId'],
-        // 'status': "Pending"
+        'status': "Pending"
       })
         
       
