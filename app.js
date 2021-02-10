@@ -46,4 +46,4 @@ app.listen(port, function(){
   console.log('Listening on ' + port)
 })
 
-// NODE_TLS_REJECT_UNAUTHORIZED=0
+// NODE_TLS_REJECT_UNAUTHORIZED=0 nodemon app.js
