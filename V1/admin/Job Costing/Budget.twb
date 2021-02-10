@@ -1,0 +1,398 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20203.20.0801.1333                               -->
+<workbook original-version='18.1' source-build='2020.3.0 (20203.20.0801.1333)' source-platform='mac' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <_.fcp.MarkAnimation.true...MarkAnimation />
+    <_.fcp.ObjectModelEncapsulateLegacy.true...ObjectModelEncapsulateLegacy />
+    <_.fcp.ObjectModelTableType.true...ObjectModelTableType />
+    <_.fcp.SchemaViewerObjectModel.true...SchemaViewerObjectModel />
+    <SheetIdentifierTracking />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='Budgeted Time+ (Job  v2)' inline='true' name='federated.0p3muos096ys9q1cx775z0kkedc5' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='Job  v2' name='excel-direct.0fbjcuh12m76o9117jfaw13ury6b'>
+            <connection class='excel-direct' cleaning='no' compat='no' dataRefreshTime='' filename='/Users/milanvanniekerk/Desktop/Connectt/Job Costing/Job  v2.xlsx' interpretationMode='0' password='' server='' validate='no' />
+          </named-connection>
+        </named-connections>
+        <_.fcp.ObjectModelEncapsulateLegacy.false...relation connection='excel-direct.0fbjcuh12m76o9117jfaw13ury6b' name='Budgeted Time' table='[&apos;Budgeted Time$&apos;]' type='table'>
+          <columns gridOrigin='A1:D713:no:A1:D713:0' header='yes' outcome='2'>
+            <column datatype='string' name='Client' ordinal='0' />
+            <column datatype='string' name='Worktype' ordinal='1' />
+            <column datatype='string' name='Employee' ordinal='2' />
+            <column datatype='integer' name='Budgeted Time (Min)' ordinal='3' />
+          </columns>
+        </_.fcp.ObjectModelEncapsulateLegacy.false...relation>
+        <_.fcp.ObjectModelEncapsulateLegacy.true...relation connection='excel-direct.0fbjcuh12m76o9117jfaw13ury6b' name='Budgeted Time' table='[&apos;Budgeted Time$&apos;]' type='table'>
+          <columns gridOrigin='A1:D713:no:A1:D713:0' header='yes' outcome='2'>
+            <column datatype='string' name='Client' ordinal='0' />
+            <column datatype='string' name='Worktype' ordinal='1' />
+            <column datatype='string' name='Employee' ordinal='2' />
+            <column datatype='integer' name='Budgeted Time (Min)' ordinal='3' />
+          </columns>
+        </_.fcp.ObjectModelEncapsulateLegacy.true...relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[Budgeted Time]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='context'>0</attribute>
+              <attribute datatype='string' name='gridOrigin'>&quot;A1:D713:no:A1:D713:0&quot;</attribute>
+              <attribute datatype='boolean' name='header'>true</attribute>
+              <attribute datatype='integer' name='outcome'>2</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Client</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Client]</local-name>
+            <parent-name>[Budgeted Time]</parent-name>
+            <remote-alias>Client</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RGB_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Budgeted Time_D5BDCF816E69461993F6781A50DC4CAF]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Worktype</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Worktype]</local-name>
+            <parent-name>[Budgeted Time]</parent-name>
+            <remote-alias>Worktype</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RGB_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Budgeted Time_D5BDCF816E69461993F6781A50DC4CAF]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Employee</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Employee]</local-name>
+            <parent-name>[Budgeted Time]</parent-name>
+            <remote-alias>Employee</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RGB_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Budgeted Time_D5BDCF816E69461993F6781A50DC4CAF]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Budgeted Time (Min)</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Budgeted Time (Min)]</local-name>
+            <parent-name>[Budgeted Time]</parent-name>
+            <remote-alias>Budgeted Time (Min)</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Budgeted Time_D5BDCF816E69461993F6781A50DC4CAF]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Budgeted Time (Hrs)' datatype='real' name='[Calculation_62839306824105984]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='[Budgeted Time (Min)]/60' />
+      </column>
+      <column datatype='string' name='[Employee]' role='dimension' type='nominal' />
+      <column datatype='string' name='[Worktype]' role='dimension' type='nominal' />
+      <_.fcp.ObjectModelTableType.true...column caption='Budgeted Time' datatype='table' name='[__tableau_internal_object_id__].[Budgeted Time_D5BDCF816E69461993F6781A50DC4CAF]' role='measure' type='quantitative' />
+      <column-instance column='[Worktype]' derivation='None' name='[none:Worktype:nk]' pivot='key' type='nominal' />
+      <group caption='Employee Set' name='[Employee Set]' name-style='unqualified' user:ui-builder='filter-group'>
+        <groupfilter function='except' user:ui-domain='database' user:ui-enumeration='exclusive' user:ui-marker='enumerate'>
+          <groupfilter function='level-members' level='[Employee]' />
+          <groupfilter function='member' level='[Employee]' member='&quot;0&quot;' />
+        </groupfilter>
+      </group>
+      <layout _.fcp.SchemaViewerObjectModel.false...dim-percentage='0.5' _.fcp.SchemaViewerObjectModel.false...measure-percentage='0.4' dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[none:Worktype:nk]' type='palette'>
+            <map to='#4e79a7'>
+              <bucket>&quot;BAS 1&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;IAS&quot;</bucket>
+            </map>
+            <map to='#76b7b2'>
+              <bucket>&quot;EOFY&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;Reporting&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;Bookkeeping&quot;</bucket>
+            </map>
+            <map to='#edc948'>
+              <bucket>&quot;Payroll&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;BAS 2&quot;</bucket>
+            </map>
+            <map to='#ff9da7'>
+              <bucket>&quot;Super&quot;</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United Kingdom&quot;' />
+      </semantic-values>
+      <date-options start-of-week='monday' />
+      <_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
+        <objects>
+          <object caption='Budgeted Time' id='Budgeted Time_D5BDCF816E69461993F6781A50DC4CAF'>
+            <properties context=''>
+              <relation connection='excel-direct.0fbjcuh12m76o9117jfaw13ury6b' name='Budgeted Time' table='[&apos;Budgeted Time$&apos;]' type='table'>
+                <columns gridOrigin='A1:D713:no:A1:D713:0' header='yes' outcome='2'>
+                  <column datatype='string' name='Client' ordinal='0' />
+                  <column datatype='string' name='Worktype' ordinal='1' />
+                  <column datatype='string' name='Employee' ordinal='2' />
+                  <column datatype='integer' name='Budgeted Time (Min)' ordinal='3' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+        </objects>
+      </_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='Sheet 1'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Budgeted Time+ (Job  v2)' name='federated.0p3muos096ys9q1cx775z0kkedc5' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0p3muos096ys9q1cx775z0kkedc5'>
+            <column datatype='integer' name='[Budgeted Time (Min)]' role='measure' type='quantitative' />
+            <column caption='Budgeted Time (Hrs)' datatype='real' name='[Calculation_62839306824105984]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='[Budgeted Time (Min)]/60' />
+            </column>
+            <column datatype='string' name='[Client]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Employee]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Worktype]' role='dimension' type='nominal' />
+            <column-instance column='[Client]' derivation='None' name='[none:Client:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Worktype]' derivation='None' name='[none:Worktype:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Calculation_62839306824105984]' derivation='Sum' name='[sum:Calculation_62839306824105984:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0p3muos096ys9q1cx775z0kkedc5].[Employee Set]'>
+            <groupfilter function='member' level='[Employee]' member='&quot;Joanna&quot;' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0p3muos096ys9q1cx775z0kkedc5].[none:Worktype:nk]'>
+            <groupfilter function='level-members' level='[none:Worktype:nk]' />
+          </filter>
+          <slices>
+            <column>[federated.0p3muos096ys9q1cx775z0kkedc5].[none:Worktype:nk]</column>
+            <column>[federated.0p3muos096ys9q1cx775z0kkedc5].[Employee Set]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='cell-w' value='120' />
+            <format attr='cell-h' value='20' />
+            <format attr='cell' value='20' />
+            <format attr='cell-q' value='100' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='text-orientation' field='[federated.0p3muos096ys9q1cx775z0kkedc5].[none:Client:nk]' value='0' />
+          </style-rule>
+          <style-rule element='data-highlighter-title'>
+            <format attr='title' field='[federated.0p3muos096ys9q1cx775z0kkedc5].[none:Worktype:nk]' value='Worktype'>
+              <formatted-text>
+                <run>Worktype</run>
+              </formatted-text>
+            </format>
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.0p3muos096ys9q1cx775z0kkedc5].[none:Worktype:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='pane'>
+                <format attr='aspect' value='0' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0p3muos096ys9q1cx775z0kkedc5].[sum:Calculation_62839306824105984:qk]</rows>
+        <cols>[federated.0p3muos096ys9q1cx775z0kkedc5].[none:Client:nk]</cols>
+      </table>
+      <simple-id uuid='{CB3619BE-6382-41B3-BA15-4A2FB03B0CF1}' />
+    </worksheet>
+  </worksheets>
+  <windows source-height='30'>
+    <window class='worksheet' maximized='true' name='Sheet 1'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card mode='dropdown' param='[federated.0p3muos096ys9q1cx775z0kkedc5].[Employee Set]' type='filter' />
+            <card pane-specification-id='0' param='[federated.0p3muos096ys9q1cx775z0kkedc5].[none:Worktype:nk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.0p3muos096ys9q1cx775z0kkedc5].[Employee (group)]</field>
+            <field>[federated.0p3muos096ys9q1cx775z0kkedc5].[Employee Set]</field>
+            <field>[federated.0p3muos096ys9q1cx775z0kkedc5].[none:Calculation_62839306826768385:nk]</field>
+            <field>[federated.0p3muos096ys9q1cx775z0kkedc5].[none:Client:nk]</field>
+            <field>[federated.0p3muos096ys9q1cx775z0kkedc5].[none:Employee:nk]</field>
+            <field>[federated.0p3muos096ys9q1cx775z0kkedc5].[none:Worktype:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{015946E3-8643-4AF2-939E-455D27874AA0}' />
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height='192' name='Sheet 1' width='192'>
+      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
+    </thumbnail>
+  </thumbnails>
+</workbook>
