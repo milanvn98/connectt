@@ -14,7 +14,7 @@ const mailgun = require("mailgun-js")({
 const xero = new XeroClient({
     clientId: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    redirectUris: ['https://localhost:3000/xero-callback'],
+    redirectUris: [process.env.REDIRECT_URI],
     openIdClient: TokenSet,
     scopes: "openid profile email payroll.employees offline_access accounting.transactions accounting.settings payroll.payruns payroll.payslip payroll.timesheets payroll.settings".split(" "),
     state: "",
