@@ -48,7 +48,7 @@ app.get("/login", function (req, res) {
       phone: req.body.phone,
     };
 
-    db.registerUser(req.body.username, req.body.password, user => {
+    db.registerUser(client['email'], req.body.password, user => {
         if (user){
             db.createClient(client)
             passport.authenticate("local")(req, res, function () {res.redirect("/dashboard")});

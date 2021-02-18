@@ -33,7 +33,11 @@ passport.deserializeUser(User.deserializeUser());
   //Register
    function registerUser(usn, password, callback){
     User.register({username: usn}, password, function(err, user){
-      callback(user)
+      if(err){
+        console.log(err)
+      } else {
+        callback(user)
+      }
     })
   }
 

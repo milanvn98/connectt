@@ -64,7 +64,7 @@ app.get("/", function (req, res) {
                 })
             })
         } else {
-            crud.findClient('email', req.user.username, client => {
+            crud.findClient({email: req.user.username}, client => {
                 res.render("dashboard/dashboard", {customer: client})
             })   
         }

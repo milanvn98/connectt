@@ -157,4 +157,31 @@ app.get('/tableau-connect', async function (req, res) {
 })
 
 
+app.post('update-karbon', (req,res) => {
+  
+  const workFlow = []
+
+  workFlow.forEach( flow => {
+   
+    const rqst = {
+      method: 'PATCH',
+      url: `https://api.karbonhq.com/v3/WorkItems/$filter=Key eq '{key}'`,
+      headers: {
+        'AccessKey': process.env.KARBON_API,
+        'Authorization': 'Bearer ' + process.env.KARBON_SECRET
+      },
+      body: {
+        title: flow['WorkTitle'],
+        workType: flow['WorkType'],
+        estimatedBudget: flow['Budget'],
+      }
+    }
+  
+    request(rqst)
+  })
+
+  
+
+})
+
 module.exports = app
