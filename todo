@@ -1,4 +1,4 @@
-
+ 
 
 Priority:
 
@@ -16,10 +16,8 @@ TFN Disabled more clear
 
 
 NOTES:
-
-Redirect to confirmation page, currently connectt
-If the user enters an invalid super, it just wont add it. Hard to verify super. Although have validated TFN + bsb acc no, will fail if not.
-
+Set up notification on success
+Set up Edit request facility
 
 Validation:
 DOB has to be in past

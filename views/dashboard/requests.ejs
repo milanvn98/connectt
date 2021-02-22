@@ -15,12 +15,12 @@
                 <th style="border-radius: 0 10px 0 0">Status</th>
             </tr>
             <% requests.forEach(request => { %>
-                <tr>
+                <tr onclick=(editRequest(this))>
                     <td><%= request.company %></td>
                     <td><%= request.firstName %> <%= request.lastName %></td>
                     <td><%= request.email %></td>
                     <form action="/get-authorised" method="POST">
-                    <input type="hidden" name="reqID" value="<%= request._id %>">
+                    <input type="hidden" name="reqID" value="<%= request._id %>" id="reqID">
                     <td><% if( request.status == "Authorise"){ %>
                         <select name="tenantId" id="tenant">
                             <% tenants.forEach( tenant => { %>

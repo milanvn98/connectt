@@ -134,6 +134,7 @@ const requestSchema = new mongoose.Schema({
     classification: String,
     employmentBasis: String,
     rate: String,
+    notes: String,
     status: String,
     company: String,
     token: String,

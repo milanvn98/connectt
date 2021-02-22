@@ -11,6 +11,7 @@ const mailgun = require("mailgun-js")({
   apiKey: process.env.API,
   domain: process.env.DOMAIN,
 });
+const _ = require('underscore')
 
 app.use(require('../web/navigation'))
 
@@ -150,6 +151,7 @@ app.post("/new-employee-request", function (req, res) {
     classification: req.body.classification,
     employmentBasis: req.body.employmentBasis,
     rate: req.body.rate,
+    notes: req.body.notes,
     company: req.body.company,
     status: "Authorise",
   };
@@ -337,7 +339,10 @@ app.post("/create-employee", function (req, res) {
 
             if (reqs['status'] != "Pending") {
               //Disconnect Xero Tenant
-              db.findManyRequests({ 'tenant': tenant.tenantId, 'status': 'Pending'}, requests => {
+              db.findManyRequests({
+                'tenant': tenant.tenantId,
+                'status': 'Pending'
+              }, requests => {
                 if (requests.length < 1 || !requests) {
                   xero.disconnect(tenant['id'])
                   db.deleteTenant({
@@ -346,14 +351,30 @@ app.post("/create-employee", function (req, res) {
                 }
               })
             } else {
-              setTimeout(function(){
+              setTimeout(function () {
                 disconnectTenant()
-              },3000)
+              }, 3000)
             }
           })
         }
 
         disconnectTenant()
+
+        // Message
+        const data = {
+          from: "milan@connecttbs.com",
+          to: 'admin@connecttbs.com',
+          subject: "Successful application for " + request['company'],
+          html: `
+            <p style="margin-bottom: 20px;"> Hi! <br> 
+            <p>` + request['firstName'] + ` has just successfully completed their application at ` + request['company'] + `</p>
+            <p style="margin: 60px 0;">Thank you! <br> Kind Regards, <br> Connectt Total Business Solutions</p>`
+        };
+
+        //Send
+        mailgun.messages().send(data, (err, body) => {
+          console.log(err)
+        });
 
       })
 
@@ -366,7 +387,55 @@ app.post("/create-employee", function (req, res) {
 
     })
   })
-})
+});
 
+app.get("/find-employee", (req, res) => {
+
+  const request_id = req.query.request_id
+
+  db.findRequest({
+    _id: request_id
+  }, request => {
+    request ? res.send(request) : res.send({
+      status_code: 500
+    })
+  })
+
+});
+
+app.post("/edit-employee-request", (req, res) => {
+
+  const request = {
+    _id: req.body._id,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    company: req.body.company,
+    email: req.body.email,
+    phone: req.body.phone,
+    startDate: req.body.startDate,
+    employmentBasis: req.body.employmentBasis,
+    jobTitle: req.body.jobTitle,
+    rate: req.body.rate,
+    classification: req.body.classification,
+  }
+
+
+
+  db.findRequest({
+    _id: request['_id']
+  }, rst => {
+    const email = rst['email']
+
+    const combReq = _.extend(rst, request)
+
+    email != combReq['email'] ? combReq['status'] = "Authorise" : null
+    db.updateRequest({
+      _id: combReq['id']
+    }, combReq)
+
+    res.redirect('/dashboard?refresh=true')
+  })
+
+})
 
 module.exports = app
