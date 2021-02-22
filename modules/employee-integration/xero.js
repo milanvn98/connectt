@@ -416,6 +416,7 @@ app.post("/edit-employee-request", (req, res) => {
     employmentBasis: req.body.employmentBasis,
     jobTitle: req.body.jobTitle,
     rate: req.body.rate,
+    notes: req.body.notes,
     classification: req.body.classification,
   }
 
