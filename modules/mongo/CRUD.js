@@ -7,7 +7,7 @@ const passportLocalMongoose = require("passport-local-mongoose");
 /////////////////////////////////////////// Mongo Setup /////////////////////////////////////////////////////
 
 //mongod --dbpath /usr/local/var/mongodb --logpath /usr/local/var/log/mongodb/mongo.log --fork
-mongoose.connect("mongodb+srv://admin-milan:milan6226@cluster0.julte.mongodb.net/connecttbs?retryWrites=true&w=majority", {
+mongoose.connect(process.env.MONGO_DB, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
