@@ -1,49 +1,49 @@
-var currentTab = 0; // Current tab is set to be the first tab (0)
-showTab(currentTab); // Display the current tab
+// var currentTab = 0; // Current tab is set to be the first tab (0)
+// showTab(currentTab); // Display the current tab
 
-function showTab(n) {
-  // This function will display the specified tab of the form ...
-  var tab = document.getElementsByClassName("tab");
-  tab[n].style.display = "block";
-  // ... and fix the Previous/Next buttons:
-  if (n == 0) {
-    document.getElementById("prevBtn").style.display = "none";
-  } else {
-    document.getElementById("prevBtn").style.display = "inline";
-  }
-  if (n == (tab.length - 1)) {
-    document.getElementById("nextBtn").innerHTML = "Submit";
-  } else {
-    document.getElementById("nextBtn").innerHTML = "Next";
-  }
-  // ... and run a function that displays the correct step indicator:
-  fixStepIndicator(n)
-}
+// function showTab(n) {
+//   // This function will display the specified tab of the form ...
+//   var tab = document.getElementsByClassName("tab");
+//   tab[n].style.display = "block";
+//   // ... and fix the Previous/Next buttons:
+//   if (n == 0) {
+//     document.getElementById("prevBtn").style.display = "none";
+//   } else {
+//     document.getElementById("prevBtn").style.display = "inline";
+//   }
+//   if (n == (tab.length - 1)) {
+//     document.getElementById("nextBtn").innerHTML = "Submit";
+//   } else {
+//     document.getElementById("nextBtn").innerHTML = "Next";
+//   }
+//   // ... and run a function that displays the correct step indicator:
+//   fixStepIndicator(n)
+// }
 
-function nextPrev(n) {
+// function nextPrev(n) {
   
-  // This function will figure out which tab to display
-  var tab = document.getElementsByClassName("tab");
+//   // This function will figure out which tab to display
+//   var tab = document.getElementsByClassName("tab");
   
-  // Exit the function if any field in the current tab is invalid:
-  if (n == 1 && !validateForm()) return false;
-  // Hide the current tab:
-  tab[currentTab].style.display = "none";
-  // Increase or decrease the current tab by 1:
-  currentTab = currentTab + n;
-  // if you have reached the end of the form... :
-  if (currentTab >= tab.length) {
-    //...the form gets submitted:
-    $('#form-btns').addClass('d-none');
+//   // Exit the function if any field in the current tab is invalid:
+//   if (n == 1 && !validateForm()) return false;
+//   // Hide the current tab:
+//   tab[currentTab].style.display = "none";
+//   // Increase or decrease the current tab by 1:
+//   currentTab = currentTab + n;
+//   // if you have reached the end of the form... :
+//   if (currentTab >= tab.length) {
+//     //...the form gets submitted:
+//     $('#form-btns').addClass('d-none');
 
-    $('#thanks').append("<p class='text-white mt-5 mt-lg-0 text-center h2 fw-light my-3'>Thank you.</p>")
-    setTimeout(function(){document.getElementById("new-employee-form").submit();},1000)
+//     $('#thanks').append("<p class='text-white mt-5 mt-lg-0 text-center h2 fw-light my-3'>Thank you.</p>")
+//     setTimeout(function(){document.getElementById("new-employee-form").submit();},1000)
     
-    return false;
-  }
-  // Otherwise, display the correct tab:
-  showTab(currentTab);
-}
+//     return false;
+//   }
+//   // Otherwise, display the correct tab:
+//   showTab(currentTab);
+// }
 
 function validateForm() {
   // This function deals with validation of the form fields
@@ -152,7 +152,6 @@ $('#noTfn').change( event => {
       $('#tfn')[0].value == ""
       $('#tfn').attr('disabled', false)
     }
-  
 })
 
 

@@ -2,7 +2,6 @@ const express = require('express')
 const app = express.Router()
 const request = require('request-promise')
 require("dotenv").config();
-const db = require('../mongo/CRUD')
 
 
 app.use(require('../web/navigation'))
@@ -31,11 +30,6 @@ app.get('/tableau-connect', async function (req, res) {
     return today
   }
 
-  async function getDate(){
-    const startDate = await db.retrieveDate()
-    return startDate
-  }
-
   // //TSHEETS Get
 
   const fullData = []
@@ -48,7 +42,7 @@ app.get('/tableau-connect', async function (req, res) {
       method: 'GET',
       url: 'https://rest.tsheets.com/api/v1/timesheets',
       qs: {
-        start_date: await getDate(),
+        start_date: startDate(),
         end_date: endDate(),
         page: page,
         per_page: 50,
@@ -100,19 +94,19 @@ app.get('/tableau-connect', async function (req, res) {
     })
 
     //WorkType 
-    const urls = []
+    // const urls = []
 
-    data.forEach(time => {
-      const req = {
-        method: 'GET',
-        url: `https://api.karbonhq.com/v3/WorkItems`,
-        headers: {
-          'AccessKey': process.env.KARBON_API,
-          'Authorization': 'Bearer ' + process.env.KARBON_SECRET
-        },
-      }
-      urls.push(req)
-    })
+    // data.forEach(time => {
+    //   const req = {
+    //     method: 'GET',
+    //     url: `https://api.karbonhq.com/v3/WorkItems`,
+    //     headers: {
+    //       'AccessKey': process.env.KARBON_API,
+    //       'Authorization': 'Bearer ' + process.env.KARBON_SECRET
+    //     },
+    //   }
+    //   urls.push(req)
+    // })
 
 
     // const arrayOfPromises = urls.map((url) => request(url));
@@ -143,7 +137,6 @@ app.get('/tableau-connect', async function (req, res) {
 
     if (data.length < 50) {
       res.send(fullData)
-      db.saveDate(endDate())
     } else {
       console.log(page)
       console.log(data.length)
@@ -157,7 +150,7 @@ app.get('/tableau-connect', async function (req, res) {
 })
 
 
-app.post('update-karbon', (req,res) => {
+app.post('/update-karbon', (req,res) => {
   
   const workFlow = []
 

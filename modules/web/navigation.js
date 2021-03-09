@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express.Router()
-const crud = require('../mongo/CRUD')
+const mongo = require('../mongo/CRUD')
 const mongoose = require("mongoose");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
@@ -55,16 +55,21 @@ app.get("/", function (req, res) {
   app.get("/dashboard", function (req, res) {
     if (req.isAuthenticated()){
         if (req.user.username == "admin@connecttbs.com"){
-            crud.findAllClients(clients => {
-                crud.findAllRequests(requests => {
+            mongo.Client.find(function(err, clients){
+              err ? console.log(err) : console.log('Found all clients.')
+                mongo.Request.find(function(err, requests){
+                  err ? console.log(err) : console.log('Found all requests.')
                     requests.sort((a, b) => (a.status > b.status) ? 1 : -1)
-                    crud.findAllTenants(tenants => {
+                    mongo.Tenant.find(function(err, tenants){
+                        err ? console.log(err) : console.log('Found all tenants.')
                         res.render('dashboard/admin', {requests: requests, customers: clients, tenants: tenants})
                     })
                 })
             })
         } else {
-            crud.findClient({email: req.user.username}, client => {
+            mongo.Client.find({email: req.user.username}, function(err, client){
+                err ? console.log(err) : console.log('Found client successfully.')
+                client = client[0]
                 res.render("dashboard/dashboard", {customer: client})
             })   
         }
@@ -80,26 +85,29 @@ app.post("/send", function (req, res) {
   const email = req.body.email;
   const message = req.body.message;
 
-  const data = {
-    from: "milan@connecttbs.com",
-    to: "admin@connecttbs.com",
-    subject: "New Form Submission",
-    text:
-      `
-    Hi!
-    
-    Please contact ` +
-      name +
-      ` at ` +
-      email +
-      `. Here is their message: 
-    ` +
-      message,
-  };
-
-  mailgun.messages().send(data, (error, body) => {});
-  alert("Message Sent!");
-  res.redirect("/");
+  if(req.body.sum == "8"){
+    const data = {
+      from: "milan@connecttbs.com",
+      to: "admin@connecttbs.com",
+      subject: "New Form Submission",
+      text:
+        `
+      Hi!
+      
+      Please contact ` +
+        name +
+        ` at ` +
+        email +
+        `. Here is their message: 
+      ` +
+        message,
+    };
+  
+    mailgun.messages().send(data, (error, body) => {});
+    alert("Message Sent!");
+    res.redirect("/");
+  }
+  
 });
 
 

@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express.Router()
-const db = require('../mongo/CRUD')
+const mongo = require('../mongo/CRUD')
 const {
   XeroClient
 } = require("xero-node");
@@ -57,8 +57,6 @@ app.get("/xero-callback", async function (req, res) {
   const token = await xero.apiCallback(req.url).catch((err) => {
     console.log(err);
   });
-  console.log(token)
-
 
   //Get Tenants
   const xeroTenants = await xero.updateTenants(false).catch((err) => {
@@ -71,43 +69,50 @@ app.get("/xero-callback", async function (req, res) {
 
   if (!tenant) {
     tenant = await tenants[0]
-    db.createTenant(tenant)
+    mongo.Tenant.create(tenant, function(err){
+      err ? console.log(err) : console.log("Tenant did not exist, so created successfully.")
+    })
   }
 
   //Get Super
   await xero.setTokenSet(token)
-  const response = await xero.payrollAUApi.getSuperfunds(tenant['tenantId']).catch((err) => {
-    console.log(err);
+  let response = await xero.payrollAUApi.getSuperfunds(tenant['tenantId']).catch((err) => {
+    console.log(err)
   });
 
+
   //Add Super to Tenant
-  db.updateTenant({
-    'tenantId': tenant['tenantId']
-  }, {
+  mongo.Tenant.updateOne({'tenantId': tenant['tenantId']}, 
+  {
     'superFunds': response['response']['body']['SuperFunds'],
     'request': requestID,
     'token': token['refresh_token']
+  }, function(err){
+    err ? console.log(err) : console.log("Super, request & token added to tenant.")
   })
+ 
 
 
   //Create Token
   token['request'] = requestID
   token['tenant'] = tenant['tenantId']
-  db.createToken(token)
+  mongo.Token.create(token, function(err){
+    err ? console.log(err) : console.log("Token created successfully.")
+  })
 
 
   //Find Request
-  db.findRequest({
-    '_id': requestID
-  }, request => {
+  mongo.Request.find({'_id': requestID}, (err, request) => {
+    request = request[0]
+    err ? console.log(err) : console.log("Request found successfully.")
 
     //Update Request
-    db.updateRequest({
-      '_id': requestID
-    }, {
+    mongo.Request.updateOne({'_id': requestID}, {
       'token': token['refresh_token'],
       'tenant': tenant['tenantId'],
       'status': "Pending"
+    }, function(err){
+      err ? console.log(err) : console.log("Token, tenant & status added to request.")
     })
 
 
@@ -156,8 +161,9 @@ app.post("/new-employee-request", function (req, res) {
     status: "Authorise",
   };
 
-
-  db.createRequest(request)
+  mongo.Request.create(request, function(err){
+    err ? console.log(err) : console.log("Request created successfully.")
+  })
   res.redirect("/dashboard?refresh=true");
 
 
@@ -173,22 +179,24 @@ app.post("/new-employee-request", function (req, res) {
       <p style="margin: 40px 0;">Thank you!</p>`
   }
 
-  mailgun.messages().send(data, (error, body) => {});
+  mailgun.messages().send(data, (err, body) => {
+    err ? console.log(err) : console.log('Email sent successfully.')
+  });
 });
 
 app.get("/employee-application", function (req, res) {
   const tok = req.query.token;
   const tenantId = req.query.tenantId;
 
-  db.findToken({
-    'refresh_token': tok
-  }, token => {
-    db.findRequest({
-      '_id': token['request']
-    }, request => {
-      db.findTenant({
-        'tenantId': tenantId
-      }, tenant => {
+  mongo.Token.find({'refresh_token': tok}, function(err, token){
+    err ? console.log(err) : console.log('Token found successfully.')
+    mongo.Request.find({'token': tok}, function(err, request){
+      err ? console.log(err) : console.log('Request found successfully.')
+      mongo.Tenant.find({'tenantId': tenantId}, function(err, tenant){
+        err ? console.log(err) : console.log('Tenant found successfully.')
+        request = request[0]
+        token = token[0]
+        tenant = tenant[0]
         res.render("application", {
           token: token['refresh_token'],
           request: request,
@@ -202,15 +210,17 @@ app.get("/employee-application", function (req, res) {
 
 app.post("/create-employee", function (req, res) {
 
-  db.findToken({
-    'refresh_token': req.body.token
-  }, async token => {
-    db.findTenant({
-      'tenantId': req.body.tenantId
-    }, async tenant => {
-      db.findRequest({
-        '_id': token['request']
-      }, async request => {
+
+  mongo.Token.find({'refresh_token': req.body.token}, async (err, token) => {
+    err ? console.log(err) : console.log('Token found successfully.')
+    token = token[0]
+    mongo.Tenant.find({'tenantId': req.body.tenantId}, async (err, tenant) => {
+      err ? console.log(err) : console.log('Tenant found successfully.')
+      tenant = tenant[0]
+      mongo.Request.find({'_id': token['request']}, async (err, request) => {
+        err ? console.log(err) : console.log('Request found successfully.')
+
+        request = request[0]
 
         //Refresh Token
         const newXeroClient = new XeroClient();
@@ -261,7 +271,6 @@ app.post("/create-employee", function (req, res) {
         }]
 
         if (req.body.secondbsb != "") {
-          bankAccounts[0]['remainder'] = false
           bankAccounts.push({
             statementText: "Salary",
             accountName: req.body.secondAccountName,
@@ -311,42 +320,116 @@ app.post("/create-employee", function (req, res) {
           }]
         }
 
-
+        let data
         //Create Employee
+        mongo.Application.create(employee, async function(err, e){
+          err ? console.log(err) : console.log("Application saved successfully")
+          // console.log(e)
+          e = e[0]
+          data = {
+            from: "milan@connecttbs.com",
+            to: 'milan@vanniekerks.com',
+            subject: "Successful application for " + request['company'],
+            html: `
+              <p style="margin-bottom: 20px;"> Hi! <br> 
+              <p>` + request['firstName'] + ` has just successfully completed their application at ` + request['company'] + `.The data has been imported into Xero. This is what they entered:</p>
+              <br>
+              <p>Title: ${e["title"]}</p>
+              <p>First Name: ${e['firstName']}</p>
+              <p>Last Name: ${e["lastName"]}</p>
+              <p>Date of Birth: ${e["dateOfBirth"]}</p>
+              <p>Gender: ${e["gender"]}</p>
+              <br>
+              <p>Email: ${e["email"]}</p>
+              <p>Phone: ${e["phone"]}</p>
+              <br>
+              <p>Home Address: ${e["homeAddress"]["addressLine1"]}, ${e["homeAddress"]["addressLine2"]}, 
+              <br>${e["homeAddress"]["city"]}, ${e["homeAddress"]["region"]}, 
+              <br>${e["homeAddress"]["country"]}, ${e["homeAddress"]["postalCode"]}</p>
+              <br>
+              <p>Tax File Number: ${e["taxDeclaration"]["taxFileNumber"]}</p>
+              <p>Residency Status: ${e["taxDeclaration"]["residencyStatus"]}</p>
+              <p>Tax Free Threshold: ${e["taxDeclaration"]["taxFreeThresholdClaimed"]}</p>
+              <p>HELP Debt: ${e["taxDeclaration"]["hasHELPDebt"]}</p>
+              <p>SFSS Debt: ${e["taxDeclaration"]["hasSFSSDebt"]}</p>
+              <br>
+              <p>Bank Account Details: 
+              <br>
+              ` + e["bankAccounts"].map( account => {
+                
+                const string = `<p>Account Name: ${account["accountName"]}</p>
+                <p>BSB: ${account["bSB"]}</p>
+                <p>Account Number: ${account["accountNumber"]}</p>
+                <p>Remainder: ${account["remainder"]}</p>
+                <p>Fixed Amount: ${account["amount"]}</p>
+                <br>
+                `
+                return string
+              }) 
+              + `</p>
+              <br>
+              <p>Super Details: 
+              <br>
+              ` + 
+              e["superMemberships"].map( membership => {
+                const string = `
+                <p>FundName: ${superFund["Name"]}</p>
+                <p>USI: ${superFund["USI"]}</p>
+                <p>Employer Number: ${superFund["EmployerNumber"]}</p>
+                <p>Employee Number: ${membership["employeeNumber"]}</p>
+                <br>
+                `
+                return string
+              })
+              + ` </p>
+              
+              <p style="margin: 20px 0;">Thank you! <br> Kind Regards, <br> Connectt Total Business Solutions</p>`
+          };
+
+          e["request"] = request['_id']
+          e.save()
+          
+        })
+
         const response = await xero.payrollAUApi.createEmployee(tenant.tenantId, employee).catch((error) => {
-          res.send(error);
+          console.log(error)
         });
 
-
-        //Check Response Status and Change Request Status
+        //Send
+        if (response){
+          mailgun.messages().send(data, (err, body) => {
+            err ? console.log(err) : console.log('Mail Sent.')
+          });
+        }
+        
+        
+        // //Check Response Status and Change Request Status
         if (response) {
           if (response['response']['statusCode'] == 200) {
             request['status'] = "Success"
-            request.save()
+            await request.save()
           } else {
             request['status'] = "Failed"
-            request.save()
+            await request.save()
           }
         } else {
           request['status'] = "Failed"
-          request.save()
+          await request.save()
         }
 
         function disconnectTenant() {
-          db.findRequest({
-            'tenant': tenant.tenantId
-          }, reqs => {
+          mongo.Request.find({'tenant': tenant.tenantId}, (err, reqs) => {
+            err ? console.log(err) : console.log('Request found successfully.')
+            reqs = reqs[0]
 
             if (reqs['status'] != "Pending") {
               //Disconnect Xero Tenant
-              db.findManyRequests({
-                'tenant': tenant.tenantId,
-                'status': 'Pending'
-              }, requests => {
+              mongo.Request.find({'tenant': tenant.tenantId, 'status': 'Pending'}, (err, requests) => {
+                err ? console.log(err) : console.log('Disconnecting Requests found successfully.')
                 if (requests.length < 1 || !requests) {
                   xero.disconnect(tenant['id'])
-                  db.deleteTenant({
-                    'tenantId': tenant.tenantId
+                  mongo.Tenant.deleteOne({'tenantId': tenant.tenantId}, function(err){
+                    err ? console.log(err) : console.log("Tenant deleted successfully.")
                   })
                 }
               })
@@ -359,27 +442,8 @@ app.post("/create-employee", function (req, res) {
         }
 
         disconnectTenant()
-
-        // Message
-        const data = {
-          from: "milan@connecttbs.com",
-          to: 'admin@connecttbs.com',
-          subject: "Successful application for " + request['company'],
-          html: `
-            <p style="margin-bottom: 20px;"> Hi! <br> 
-            <p>` + request['firstName'] + ` has just successfully completed their application at ` + request['company'] + `</p>
-            <p style="margin: 60px 0;">Thank you! <br> Kind Regards, <br> Connectt Total Business Solutions</p>`
-        };
-
-        //Send
-        mailgun.messages().send(data, (err, body) => {
-          console.log(err)
-        });
-
+        
       })
-
-
-
 
       //Redirect to Connectt Website
       res.redirect('/')
@@ -393,9 +457,9 @@ app.get("/find-employee", (req, res) => {
 
   const request_id = req.query.request_id
 
-  db.findRequest({
-    _id: request_id
-  }, request => {
+  mongo.Request.find({_id: request_id}, (err, request) => {
+    err ? console.log(err) : console.log("Request found successfully")
+    request = request[0]
     request ? res.send(request) : res.send({
       status_code: 500
     })
@@ -421,18 +485,17 @@ app.post("/edit-employee-request", (req, res) => {
   }
 
 
+  mongo.Request.find({_id: request['_id']}, (err, rst) => {
+    err ? console.log(err) : console.log("Request found successfully.")
+    rst = rst[0]
 
-  db.findRequest({
-    _id: request['_id']
-  }, rst => {
     const email = rst['email']
-
     const combReq = _.extend(rst, request)
 
     email != combReq['email'] ? combReq['status'] = "Authorise" : null
-    db.updateRequest({
-      _id: combReq['id']
-    }, combReq)
+    mongo.Request.updateOne({_id: combReq['id']}, combReq, function(err){
+      err ? console.log(err) : console.log("Request updated successfully.")
+    })
 
     res.redirect('/dashboard?refresh=true')
   })

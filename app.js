@@ -23,7 +23,8 @@ app.set("view engine", "ejs")
 .use(require('./modules/web/navigation'))
 .use(require('./modules/web/login'))
 .use(require('./modules/employee-integration/xero'))
-.use(require('./modules/KTExtract/KTExtract'));
+.use(require('./modules/KTExtract/KTExtract'))
+.use(require('./modules/KTExtract/Tsheets'));
 
 let port = process.env.PORT;
 if(port == "" || port == null){

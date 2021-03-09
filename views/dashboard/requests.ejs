@@ -15,7 +15,7 @@
                 <th style="border-radius: 0 10px 0 0">Status</th>
             </tr>
             <% requests.forEach(request => { %>
-                <tr onclick=(editRequest(this))>
+                <tr class="t-row">
                     <td><%= request.company %></td>
                     <td><%= request.firstName %> <%= request.lastName %></td>
                     <td><%= request.email %></td>
@@ -40,7 +40,7 @@
                         <p class="status-light status"><%= request.status %></p>
                     <% } %>
                     <% if( request.status == "Success"){ %>
-                        <p class="status-dark status" ><%= request.status %></p>
+                        <p class="status-dark status" onclick="viewApplication(this)" ><%= request.status %></p>
                     <% } %>
                     <% if( request.status == "Failed"){ %>
                         <p class="status-red status" ><%= request.status %></p>

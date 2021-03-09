@@ -1,10 +1,9 @@
 const express = require('express')
 const app = express.Router()
-const db = require('../mongo/CRUD')
+const mongo = require('../mongo/CRUD')
 const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
-const mongoose = require("mongoose");
 
 
 app.use(
@@ -48,10 +47,13 @@ app.get("/login", function (req, res) {
       phone: req.body.phone,
     };
 
-    db.registerUser(client['email'], req.body.password, user => {
+    mongo.User.register(client['email'], req.body.password, (err, user) => {
+      err ? console.log(err) : console.log("User created successfully.")
         if (user){
-            db.createClient(client)
-            passport.authenticate("local")(req, res, function () {res.redirect("/dashboard")});
+            mongo.Client.create(client, function(err){
+              err ? console.log(err) : console.log("Client created successfully.")
+            })
+            passport.authenticate("local")(req, res, function() {res.redirect("/dashboard")});
         } else {
             err = "Failed to Sign Up User"
             res.render("login", {err: err})

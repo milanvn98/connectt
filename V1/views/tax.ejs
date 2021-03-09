@@ -1,0 +1,119 @@
+<%- include ('header.ejs') -%>
+
+<section id="tax-landing">
+  <div class="service-container">
+    <h1 class="service-title"><strong>Connectt Total Tax</strong></h1>
+    <div class="service-buttons">
+      <a href="/contact" class="btn btn-lg btn-outline-light">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<section id="reconcile" class="p-lg-5 py-3">
+  <h2 class="reconcile-text text-center my-3">
+    <strong>Expertise in Tax Matters.</strong>
+  </h2>
+  <p class="service-text w-75 mx-auto my-3 text-center">
+    Our experienced tax team is comprised of professionals with advanced tax certification and a long history of solving tax problems for our clients.We investigate possible scenarios and walk you through the process one step at a time, guiding you to avoid the pitfalls and obstacles you might not anticipate.
+  </p>
+</section>
+<hr class="w-75 mx-auto my-2" />
+<section id="bookkeeping-services">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-6 blurb">
+        <p class="service-text mx-5">Tax</p>
+        <h2 class="bookkeeping-accordion-text w-75">
+          <strong>Tax services we deliver.</strong>
+        </h2>
+        <p class="service-text mx-5 my-4">Tax issues differ in many ways. We've seen it all. Let our team of experts guide you to ensure you are complying and optimising your tax.</p>
+        <a href="/contact" class="btn btn-lg btn-outline-primary blurb-button" style="margin: 0px 0 0 40px;">Talk to Us</a>
+      </div>
+      <div class="col-lg-6">
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingOne">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseOne"
+                aria-expanded="false"
+                aria-controls="flush-collapseOne"
+              >
+              <i class="fas fa-building acc-icon"></i> Entities
+              </button>
+            </h2>
+            <div
+              id="flush-collapseOne"
+              class="accordion-collapse collapse"
+              aria-labelledby="flush-headingOne"
+              data-bs-parent="#accordionFlushExample"
+            >
+              <div class="accordion-body">
+                <ul style="color: var(--darkblue); width: 80%">
+                    <li>Companies</li>
+					<li>Partnerships</li>
+					<li>Sole-Traders and Individuals</li>
+					<li>Family (Discretionary) Trust and Unit Trusts</li>
+					<li>Self-Managed Superannuation Funds</li>
+					<li>GST Lodgements / Business Activity Statements</li>
+					<li>Fringe Benefits Tax Lodgemenets</li>
+					<li>Corporate Sectretarial & Incorporation Services</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingTwo">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseTwo"
+                aria-expanded="false"
+                aria-controls="flush-collapseTwo"
+              >
+              <i class="fas fa-calculator acc-icon"></i>Tax Services
+              </button>
+            </h2>
+            <div
+              id="flush-collapseTwo"
+              class="accordion-collapse collapse"
+              aria-labelledby="flush-headingTwo"
+              data-bs-parent="#accordionFlushExample"
+            >
+              <div class="accordion-body">
+                <ul style="color: var(--darkblue); width: 80%">
+                    <li>Payroll Tax</li>
+					<li>Capital Gains Tax</li>
+					<li>PAYG Variations</li>
+					<li>Negative Gearing</li>
+					<li>Small Business Concessions</li>
+					<li>Company Director Loans</li>
+					<li>Tax Compliance Reviews</li>
+					<li>Strategic Tax Planning</li>
+					<li>Business Entity Structuring and Reviews</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
+<hr class="w-75 mx-auto my-2" />
+<section id="book-other-services" class="text-center p-5">
+    <h2 class="text-center mb-5" style="color:var(--darkblue)"><strong>More Services:</strong></h2>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 ms-auto mx-3 other-service" id="bookkeeping"style="border-bottom: 10px solid var(--bookkeeping); box-sizing: content-box;" onclick="window.location.href = '../bookkeeping';">
+                <h3 class="text-center other-heading"><strong>BOOKKEEPING</strong></h3>
+            </div>
+            <div class="col-lg-3 me-auto other-service" id="profit" style="border-bottom: 10px solid var(--profit); box-sizing: content-box;" onclick="window.location.href = '../profit';">
+                <h3 class="text-center other-heading" ><strong>PROFIT</strong></h3>
+            </div>
+        </div>
+    </div>
+</section>
+<%- include ('footer.ejs') -%>

@@ -26,10 +26,6 @@ $('#new-request-btn').click(event => {
     $('#form-title')[0].innerHTML = "New Employee Request"
     const inputs = form.querySelectorAll('input')
 
-    inputs.forEach(input => {
-        input.value = ""
-    })
-
     $('.overlay').removeClass('d-none')
 })
 
@@ -45,21 +41,33 @@ if (document.querySelectorAll('.status').length > 24) {
     }
 }
 
+$('.t-row').click(event => {
+   
+    if (event.target.tagName == "TD") {
+        const request_id = event.target.parentElement.querySelector('#reqID').value
+
+        $.ajax('/find-employee?request_id=' + request_id, {
+            type: 'GET',
+            success: function (data) {
+                fillForm(data)
+            }
+        })
+
+        const form = $('#new-employee-form')[0]
+        form.action = "/edit-employee-request"
+        $('#form-title')[0].innerHTML = "Edit Employee Request"
+        $('.overlay').removeClass('d-none')
+        
+        console.log( $('.overlay'))
+    }
+
+
+})
+
 function editRequest(target) {
 
-    const request_id = target.querySelector('#reqID').value
 
-    $.ajax('/find-employee?request_id=' + request_id, {
-        type: 'GET',
-        success: function (data) {
-            fillForm(data)
-        }
-    })
 
-    const form = $('#new-employee-form')[0]
-    form.action = "/edit-employee-request"
-    $('#form-title')[0].innerHTML = "Edit Employee Request"
-    $('.overlay').removeClass('d-none')
 
 
 }
@@ -78,7 +86,7 @@ function fillForm(data) {
                 if (input.name == key) {
                     input.value = data[key]
                 }
-                if (key == 'employmentBasis'){
+                if (key == 'employmentBasis') {
                     form.querySelector('#' + data['employmentBasis']).checked = true
                 }
             }

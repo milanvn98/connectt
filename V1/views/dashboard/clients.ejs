@@ -1,0 +1,27 @@
+<div class="profile-container text-white text-left p-lg-5 p-3 w-100">
+    <h2 class="fw-light mt-1">Clients</h2>
+    <hr class="text-white w-100">
+
+    <div class="clients-table-container p-3 text-dark overflow-scroll">
+        <table>
+            <tr>
+                <th style="border-radius: 10px 0 0 0">Company</th>
+                <th>Contact Person</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th style="border-radius: 0 10px 0 0">Info</th>
+            </tr>
+            <% customers.forEach(customer => { %>
+                <tr>
+                    <input type="hidden" id="customerID" value="<%= customer._id %>">
+                    <td><%= customer.company %></td>
+                    <td><%= customer.firstName %> <%= customer.lastName %></td>
+                    <td><%= customer.email %></td>
+                    <td><%= customer.phone %></td>
+                    <td><p class="more-info">More Info</p></td>
+                </tr>
+            <% }) %>
+            
+        </table>
+    </div>
+</div>

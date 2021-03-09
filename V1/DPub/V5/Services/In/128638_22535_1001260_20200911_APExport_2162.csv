@@ -1,0 +1,7 @@
+Number,Business Unit,Business Date,TransactionType,AccountNumber,Debit Amount,CreditAmount,GSTAmount,TaxCode,FuelQuantity,Comment,SupplierName,SupplierID,Supplier Invoice Credit Ref,SupplierInvoiceDate_CreditDate,Supplier_Cheque_On_Delivery_Flag,Supplier_Paid_Out_Ref,Customer,Customer_Reference
+8333,22535 - Kempsey South - 128638,9/11/20,APSupplier,,,71.05,0,,,,LOCAL SUPPLIER 3 GST Incl. (DRCT),1000638,439979,9/11/20,,,,
+8333,22535 - Kempsey South - 128638,9/11/20,APSupplier,110032,71.05,0,0,GST Free Purchases,,INVENTORY - FOODSERVICE PREPARED ONSITE;32-01-03-Meals,LOCAL SUPPLIER 3 GST Incl. (DRCT),1000638,439979,9/11/20,,,,
+8333,22535 - Kempsey South - 128638,9/11/20,APSupplier,111100,0,0,,GST Free Purchases,,GST INPUT;32-01-03-Meals,LOCAL SUPPLIER 3 GST Incl. (DRCT),1000638,439979,9/11/20,,,,
+8334,22535 - Kempsey South - 128638,9/11/20,APSupplier,,,929.52,0,,,,LOCAL SUPPLIER 4 GST Incl. (DRCT),1000639,50254159,9/11/20,,,,
+8334,22535 - Kempsey South - 128638,9/11/20,APSupplier,110032,929.52,0,0,GST Free Purchases,,INVENTORY - FOODSERVICE PREPARED ONSITE;32-01-03-Meals,LOCAL SUPPLIER 4 GST Incl. (DRCT),1000639,50254159,9/11/20,,,,
+8334,22535 - Kempsey South - 128638,9/11/20,APSupplier,111100,0,0,,GST Free Purchases,,GST INPUT;32-01-03-Meals,LOCAL SUPPLIER 4 GST Incl. (DRCT),1000639,50254159,9/11/20,,,,
